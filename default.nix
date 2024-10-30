@@ -1,24 +1,34 @@
 {
   lib,
-  stdenv,
+  pkgs,
+  stdenvNoCC,
   ...
 }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "rbw-run";
   version = "0.0.1";
 
+  dontUnpack = true;
+  dontConfigure = true;
+  dontBuild = true;
+
   src = [ ./. ];
+
   installPhase = ''
-    install -D $src/rbw-run.nu $out/bin/rbw-run
+    install -Dm 755 $src/rbw-run.nu $out/bin/rbw-run
   '';
 
-  meta.lib = {
-    homepage = "https://github.com/run-rbw/run-rbw";
-    description = "run rbw in parallel and run program with secrets";
-    # changelog = "https://github.com/run-rbw/run-rbw/releases/tag/${version}";
+  fixupPhase = ''
+    substituteInPlace $out/bin/rbw-run \
+      --replace-fail '/usr/bin/env nu' '${pkgs.nushell}/bin/nu'
+  '';
+
+  meta = {
+    description = "run rbw in parallel and run a program with secrets";
+    homepage = "https://github.com/sedlund/run-rbw";
     license = lib.licenses.unlicense;
-    maintainers = with lib.maintainers; [ sedlund ];
     mainProgram = "rbw-run";
+    maintainers = with lib.maintainers; [ sedlund ];
   };
 }
