@@ -1,0 +1,7 @@
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.nufmt]
+command = "nufmt"
+includes = ["*.nu"]
