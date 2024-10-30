@@ -1,4 +1,5 @@
-run = "nix run"
+run = "nix run #. -- x1:y1:z1 -- echo $x1 $y1 $z1"
+# run = "nix run #. -- x1:y1:z1"
 entrypoint = "flake.nix"
 modules = ["nix"]
 
