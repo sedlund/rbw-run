@@ -7,7 +7,7 @@ def main [...args] {
     Description: run `rbw get` in parallel to set environment variables to pass
     and execute another program.
   
-    The [:::] argument can be repeated to fetch secrets with `rbwwget` in
+    The [:::] argument can be repeated to fetch secrets with `rbw get` in
     parallel for as many entries as required to pass to <command>.
   
     The terms `seed` and `field` are as defined by the `rbw` rust bitwarden
